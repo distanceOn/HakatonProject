@@ -1,9 +1,12 @@
 import s from "./App.module.scss";
-import Main from "./pages/Main/Main";
+import { PhoneNumberProvider } from "./Context/UserContext";
+import AppRoutes from "./routes/routes";
 function App() {
 	return (
 		<div className={s.app}>
-			<Main />
+			<PhoneNumberProvider>
+				<AppRoutes />
+			</PhoneNumberProvider>
 		</div>
 	);
 }
