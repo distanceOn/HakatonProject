@@ -1,0 +1,59 @@
+/* MyCard.module.scss */
+.card {
+	border: 1px solid #000;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	border-radius: 0.8em;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	box-sizing: border-box;
+
+	cursor: pointer;
+	transition: transform 0.2s; /* Плавный переход для свойства transform (scale) */
+	&:hover {
+		transform: scale(1.05); /* Небольшое увеличение при наведении */
+	}
+}
+
+.cardImage {
+	flex: 1; /* Изображение занимает всю доступную высоту карточки */
+	background-size: cover;
+	background-position: center;
+}
+
+.cardContent {
+	flex: 1; /* Контент занимает всю доступную высоту карточки */
+	padding: 1em;
+	display: flex;
+	flex-direction: column;
+}
+
+.cardTitle {
+	font-size: 1.4em;
+	margin-bottom: 0.5em;
+}
+
+.cardDescription {
+	font-size: 1em;
+}
+
+/* Адаптивные стили для разных размеров экрана */
+@media (max-width: 768px) {
+	.cardTitle {
+		font-size: 1.2em;
+	}
+
+	.cardDescription {
+		font-size: 0.9em;
+	}
+}
+
+@media (max-width: 480px) {
+	.cardTitle {
+		font-size: 1em;
+	}
+
+	.cardDescription {
+		font-size: 0.8em;
+	}
+}

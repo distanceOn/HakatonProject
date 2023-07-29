@@ -1,5 +1,6 @@
 .app {
-	width: 100vw;
-	height: 100vh;
-	background-color: #000;
+	min-height: 100vh; /* Минимальная высота страницы равна высоте окна браузера */
+	display: flex;
+	flex-direction: column;
+	background-color: #000; /* Черный фон */
 }

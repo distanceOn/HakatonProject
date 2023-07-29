@@ -1,6 +1,13 @@
-import s from "./App.module.scss";
-function App() {
-	return <div className={s.app}></div>;
+import List from "../../components/List/List";
+import ResponsiveAppBar from "../../components/ResponsiveAppBar";
+import s from "./Main.module.scss";
+function Main() {
+	return (
+		<div className={s.main}>
+			<ResponsiveAppBar />
+			<List />
+		</div>
+	);
 }
 
-export default App;
+export default Main;
