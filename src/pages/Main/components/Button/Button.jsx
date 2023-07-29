@@ -2,9 +2,10 @@ import { Button } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
-function EnterButton() {
+function EnterButton({ handleButton }) {
 	return (
 		<div
+			onClick={handleButton}
 			style={{
 				display: "flex",
 				alignItems: "center",
