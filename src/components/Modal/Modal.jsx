@@ -3,8 +3,11 @@ import { CSSTransition } from "react-transition-group";
 import { useEffect, useRef, useState } from "react";
 import BaseButton from "../Button/Button";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const Modal = ({ isOpen, setIsOpen }) => {
+	const navigate = useNavigate();
+
 	const modalRef = useRef();
 
 	const [modalState, setModalState] = useState("default");
@@ -25,6 +28,7 @@ const Modal = ({ isOpen, setIsOpen }) => {
 
 	const handleTest = () => {
 		console.log("Проходим тест");
+		navigate("/testing");
 	};
 
 	const handleGoToFaculty = () => {
@@ -87,7 +91,10 @@ const Modal = ({ isOpen, setIsOpen }) => {
 					<div className={s.modal} onClick={(e) => e.stopPropagation()}>
 						<h2 className={s.heading}>Хотите пройти тест на профориентацию?</h2>
 						<BaseButton buttonText="Хочу!" handleButton={handleTest} />
-						<BaseButton buttonText="Хочу сюда!" handleButton={handleGoToFaculty} />
+						<BaseButton
+							buttonText="Просто посмотреть факультеты"
+							handleButton={handleGoToFaculty}
+						/>
 					</div>
 				);
 

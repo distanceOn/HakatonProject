@@ -1,0 +1,41 @@
+.h2 {
+	color: #ffd700;
+}
+
+.block {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.question {
+	color: #ffd700;
+}
+
+.list {
+	list-style-type: none;
+	display: flex;
+	width: 50vw;
+	justify-content: center;
+	align-items: center;
+	gap: 2vw;
+	flex-wrap: wrap;
+}
+
+.variant {
+	background-color: #ffd700;
+	padding: 1vw;
+	font-size: 1vw;
+	border: none;
+	outline: none;
+	width: 15vw;
+	height: 6vw;
+	border-radius: 1vw;
+	cursor: pointer;
+	transition: transform 0.2s ease-in;
+	&:hover {
+		background-color: rgb(255, 251, 0);
+		transform: scale(1.05);
+	}
+}

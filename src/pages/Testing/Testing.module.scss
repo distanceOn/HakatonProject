@@ -1,0 +1,19 @@
+.testing {
+	display: flex;
+	flex-direction: column;
+	gap: 5vh;
+	padding-bottom: 5vh;
+	height: 100vh;
+}
+
+.h2 {
+	color: #ffd700;
+}
+
+.block {
+	height: 60%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
