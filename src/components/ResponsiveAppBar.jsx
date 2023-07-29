@@ -8,7 +8,6 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
@@ -47,6 +46,7 @@ function ResponsiveAppBar() {
 	};
 	const handleCatalog = () => {
 		console.log("Каталог");
+		navigate("/catalog");
 	};
 	const handleHelp = () => {
 		console.log("Помощь");
@@ -82,6 +82,9 @@ function ResponsiveAppBar() {
 	const handleCloseUserMenu = () => {
 		setAnchorElUser(null);
 	};
+	const handleMain = () => {
+		navigate("/");
+	};
 
 	return (
 		<AppBar position="static" sx={{ bgcolor: "#ffd700" }}>
@@ -91,7 +94,8 @@ function ResponsiveAppBar() {
 						variant="h6"
 						noWrap
 						component="a"
-						href="/"
+						href="#"
+						onClick={handleMain}
 						sx={{
 							mr: 2,
 							display: { xs: "none", md: "flex" },

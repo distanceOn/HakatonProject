@@ -1,6 +1,6 @@
 import Typography from "@mui/material/Typography";
 
-function H1() {
+function H1(props) {
 	return (
 		<div>
 			<Typography
@@ -13,7 +13,7 @@ function H1() {
 					color: "#ffd700",
 				}}
 			>
-				Подача документов в университет в несколько кликов!
+				{props.text}
 			</Typography>
 			{/* Другой контент страницы */}
 		</div>

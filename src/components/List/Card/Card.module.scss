@@ -8,6 +8,21 @@
 	flex-direction: column;
 	box-sizing: border-box;
 
+	&__big {
+		border: 1px solid #000;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+		border-radius: 0.8em;
+		height: 20vw;
+		width: 100%;
+		display: flex;
+		cursor: pointer;
+		box-sizing: border-box;
+		transition: transform 0.2s;
+		&:hover {
+			transform: scale(1.01); /* Небольшое увеличение при наведении */
+		}
+	}
+
 	cursor: pointer;
 	transition: transform 0.2s; /* Плавный переход для свойства transform (scale) */
 	&:hover {
@@ -19,6 +34,9 @@
 	flex: 1; /* Изображение занимает всю доступную высоту карточки */
 	background-size: cover;
 	background-position: center;
+	&__big {
+		box-sizing: border-box;
+	}
 }
 
 .cardContent {

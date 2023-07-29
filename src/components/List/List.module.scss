@@ -1,6 +1,7 @@
 /* List.module.scss */
 
 .filter {
+	margin-top: 2vh;
 	display: flex;
 	justify-content: flex-end;
 	margin-right: 6.5vw;
@@ -50,4 +51,11 @@
 
 .card_description {
 	font-size: 1.2em;
+}
+
+.other__list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2em; /* Increased gap between cards */
+	justify-content: center; /* Center the cards on the page */
 }
