@@ -29,11 +29,7 @@ function ResponsiveAppBar() {
 	};
 
 	const handleProfileClick = () => {
-		// Здесь может быть ваша логика для выполнения выхода пользователя (логаут)
-		// Например, отправка запроса на сервер или очистка данных пользователя
-		// после успешного выхода, диспатчим экшен setLogout для обновления стейта
-		// dispatch(setLogout());
-		// Закрываем меню после выполнения действий
+		navigate("/profile");
 		console.log("Профиль");
 		handleCloseUserMenu();
 	};
@@ -59,7 +55,7 @@ function ResponsiveAppBar() {
 	};
 
 	const settings = {
-		Профиль: handleProfileClick,
+		...(user && { Профиль: handleProfileClick }),
 		[user ? "Выйти" : "Войти"]: user ? handleLogout : handleLoginClick,
 	};
 

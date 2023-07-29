@@ -4,6 +4,7 @@ const initialState = {
 	isAuthenticated: false,
 	userId: null, //после регистрации и авторизации
 	userTesting: null,
+	userRequest: false,
 };
 
 const userSlice = createSlice({
@@ -24,8 +25,15 @@ const userSlice = createSlice({
 				userTesting: payload,
 			};
 		},
+		setRequest: (state) => {
+			return {
+				...state,
+				userRequest: true,
+			};
+		},
 	},
 });
-export const { setLogout, setLogin, setTesting } = userSlice.actions;
+export const { setLogout, setLogin, setTesting, setRequest } =
+	userSlice.actions;
 
 export default userSlice.reducer;

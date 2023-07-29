@@ -4,6 +4,7 @@ import Approve from "../pages/Approve/Approve";
 import ProtectedRoute from "./ProtectedRoute";
 import Catalog from "../pages/Catalog/Catalog";
 import Testing from "../pages/Testing/Testing";
+import Profile from "../pages/Profile/Profile";
 
 const AppRoutes = () => {
 	return (
@@ -12,9 +13,10 @@ const AppRoutes = () => {
 
 			<Route path="/login" element={<Approve />} />
 
-			<Route element={<ProtectedRoute />}></Route>
-
-			<Route path="/testing" element={<Testing />}></Route>
+			<Route element={<ProtectedRoute />}>
+				<Route path="/testing" element={<Testing />} />
+				<Route path="/profile" element={<Profile />} />
+			</Route>
 
 			<Route path="/catalog" element={<Catalog />} />
 

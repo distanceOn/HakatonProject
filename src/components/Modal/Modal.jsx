@@ -54,7 +54,7 @@ const Modal = ({ isOpen, setIsOpen }) => {
 			case "choose":
 				return (
 					<div className={s.modal} onClick={(e) => e.stopPropagation()}>
-						<h2 className={s.heading}>Выберите факультет</h2>
+						<h2 className={s.heading}>Выберите направление</h2>
 						<FormControl sx={{ width: "100%", bgcolor: "#fff" }}>
 							<InputLabel
 								htmlFor="faculty-select"
@@ -63,12 +63,12 @@ const Modal = ({ isOpen, setIsOpen }) => {
 									fontWeight: 700, // You can add more styles as needed
 								}}
 							>
-								Факультет
+								Направление
 							</InputLabel>
 							<Select
 								value={selectedFaculty}
 								onChange={(e) => setSelectedFaculty(e.target.value)}
-								label="Факультет" // Connect the label to the Select component
+								label="Направление" // Connect the label to the Select component
 								labelId="faculty-select"
 								inputProps={{
 									id: "faculty-select",
