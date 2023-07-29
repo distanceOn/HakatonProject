@@ -5,12 +5,13 @@ import ResponsiveAppBar from "../../components/ResponsiveAppBar";
 import s from "./Testing.module.scss";
 import Questions from "./Questions/Questions";
 import { useDispatch, useSelector } from "react-redux";
-import { selectTestingResults } from "../../redux/selectors";
+import { selectTestingResults, selectUserId } from "../../redux/selectors";
 import { setTesting } from "../../redux/slices/user";
+import { v4 as uuidv4 } from "uuid";
 
 function Testing() {
 	const [testingState, setTestingState] = useState("default");
-	const [answers, setAnswers] = useState({});
+	const [answers, setAnswers] = useState([]);
 	const [currentCategoryIndex, setCurrentCategoryIndex] = useState(0);
 
 	const questionsList = {
@@ -130,10 +131,7 @@ function Testing() {
 	};
 
 	const handleAnswerSelection = (question, answer) => {
-		setAnswers((prevAnswers) => ({
-			...prevAnswers,
-			[question]: answer,
-		}));
+		setAnswers((prevAnswers) => [...prevAnswers, answer]);
 	};
 
 	const handleNextCategory = () => {
@@ -148,11 +146,23 @@ function Testing() {
 	const results = useSelector(selectTestingResults);
 	const dispatch = useDispatch();
 
+	const user = useSelector(selectUserId);
+
 	useEffect(() => {
 		if (testingState === "completed") {
-			dispatch(setTesting(answers));
+			const randomId = uuidv4();
+			const readyAnswers = {
+				testId: randomId,
+				studentId: user,
+				responses: [],
+			};
+			answers.forEach((answer, index) => {
+				readyAnswers.responses.push({ questionId: index + 1, response: answer });
+			});
+
+			dispatch(setTesting(readyAnswers));
 		}
-	}, [testingState, answers, dispatch]);
+	}, [testingState, answers, dispatch, user]);
 
 	useEffect(() => {
 		console.log(results);

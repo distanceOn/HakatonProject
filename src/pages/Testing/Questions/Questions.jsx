@@ -14,7 +14,7 @@ function Questions({
 	const currentQuestion = questions[currentQuestionIndex];
 
 	const handleNextQuestion = (selectedAnswer) => {
-		handleAnswerSelection(currentQuestion.question, selectedAnswer);
+		handleAnswerSelection(currentQuestionIndex + 1, selectedAnswer);
 
 		if (currentQuestionIndex + 1 < questions.length) {
 			setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
