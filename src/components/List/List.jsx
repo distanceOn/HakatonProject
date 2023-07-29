@@ -2,9 +2,9 @@ import * as React from "react";
 import Grid from "@mui/material/Grid";
 import s from "./List.module.scss";
 import MyCard from "./Card/Card";
+import { MenuItem, TextField } from "@mui/material";
 
 function List() {
-	// Здесь можно определить данные для каждой карточки
 	const cardsData = [
 		{
 			id: 1,
@@ -129,18 +129,90 @@ function List() {
 		// Добавьте другие данные для карточек по аналогии
 	];
 
+	const [cityFilter, setCityFilter] = React.useState("");
+	const [titleFilter, setTitleFilter] = React.useState("");
+
+	const handleCityChange = (event) => {
+		setCityFilter(event.target.value);
+	};
+
+	const handleTitleChange = (event) => {
+		setTitleFilter(event.target.value);
+	};
+
+	const filteredCards = cardsData.filter((card) => {
+		const isCityMatch =
+			cityFilter === "" ||
+			(card.city && card.city.toLowerCase().includes(cityFilter.toLowerCase()));
+		const isTitleMatch =
+			titleFilter === "" ||
+			card.title.toLowerCase().includes(titleFilter.toLowerCase());
+		return isCityMatch && isTitleMatch;
+	});
+	// Здесь можно определить данные для каждой карточки
+
 	return (
-		<Grid container spacing={2} className={s.list}>
-			{cardsData.map((card) => (
-				<Grid key={card.id} item xs={12} sm={6} md={4} lg={2}>
-					<MyCard
-						imageUrl={card.imageUrl}
-						title={card.title}
-						description={card.description}
+		<div>
+			<div className={s.filter}>
+				<div className={s.filter__city}>
+					<TextField
+						label="Фильтр по городу"
+						variant="outlined"
+						value={cityFilter}
+						onChange={handleCityChange}
+						select
+						sx={{ bgcolor: "#000", width: "15vw" }}
+						InputLabelProps={{
+							style: {
+								color: "#ffd700", // Customize the color of the label text
+								fontWeight: 700, // You can add more styles as needed
+							},
+						}}
+					>
+						<MenuItem value="">Все</MenuItem>
+						{/* Предположим, что у вас есть массив городов, который можно использовать для выбора */}
+						{["Москва", "Санкт-Петербург", "Казань", "Екатеринбург", "Новосибирск"].map(
+							(city) => (
+								<MenuItem sx={{}} key={city} value={city}>
+									{city}
+								</MenuItem>
+							)
+						)}
+					</TextField>
+				</div>
+				<div className={s.filter__name}>
+					<TextField
+						label="Фильтр по названию"
+						variant="outlined"
+						value={titleFilter}
+						onChange={handleTitleChange}
+						sx={{ bgcolor: "#000", width: "15vw" }}
+						InputLabelProps={{
+							style: {
+								color: "#ffd700", // Customize the color of the label text
+								fontWeight: 700, // You can add more styles as needed
+							},
+						}}
+						InputProps={{
+							style: {
+								color: "#ffd700", // Customize the color of the input text
+							},
+						}}
 					/>
-				</Grid>
-			))}
-		</Grid>
+				</div>
+			</div>
+			<Grid container spacing={2} className={s.list}>
+				{filteredCards.map((card) => (
+					<Grid key={card.id} item xs={12} sm={6} md={4} lg={2}>
+						<MyCard
+							imageUrl={card.imageUrl}
+							title={card.title}
+							description={card.description}
+						/>
+					</Grid>
+				))}
+			</Grid>
+		</div>
 	);
 }
 
