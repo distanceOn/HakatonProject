@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Typography, TextField, Button, Container } from "@mui/material";
 import s from "./Approve.module.scss";
-import { useSelector } from "react-redux";
-import { selectUserId } from "../../redux/selectors";
+
 import { useNavigate } from "react-router-dom";
+import { setLogin } from "../../redux/slices/user";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUserId } from "../../redux/selectors";
 
 const Approve = () => {
 	const [phoneNumber, setPhoneNumber] = useState("9187734542");
@@ -11,12 +13,13 @@ const Approve = () => {
 	const [resendDisabled, setResendDisabled] = useState(false);
 	const [timer, setTimer] = useState(60);
 
+	const userId = useSelector(selectUserId);
+
+	const dispatch = useDispatch();
+
 	const navigate = useNavigate();
 
-	const user = useSelector(selectUserId);
-
 	useEffect(() => {
-		console.log(user);
 		let interval;
 		if (timer > 0 && resendDisabled) {
 			interval = setInterval(() => {
@@ -28,7 +31,7 @@ const Approve = () => {
 			setTimer(60);
 		}
 		return () => clearInterval(interval); // Clear the interval when the component unmounts
-	}, [timer, resendDisabled, user]);
+	}, [timer, resendDisabled]);
 
 	const handlePhoneNumberChange = (e) => {
 		// Игнорируем все, кроме цифр
@@ -53,7 +56,19 @@ const Approve = () => {
 		setTimeout(() => {
 			setResendDisabled(false);
 		}, 60000);
+
+		dispatch(
+			setLogin({
+				userId: phoneNumber, //после регистрации и авторизации
+			})
+		);
+
+		navigate("/");
 	};
+
+	useEffect(() => {
+		console.log(userId);
+	}, [userId]);
 
 	return (
 		<div className={s.auth}>
@@ -93,15 +108,7 @@ const Approve = () => {
 						fullWidth
 						sx={{ marginBottom: "1vw" }}
 					/>
-					<Button
-						type="submit"
-						variant="contained"
-						color="primary"
-						fullWidth
-						onClick={() => {
-							navigate("/");
-						}}
-					>
+					<Button type="submit" variant="contained" color="primary" fullWidth>
 						Войти
 					</Button>
 				</form>

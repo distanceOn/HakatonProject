@@ -1,15 +1,15 @@
-// import { Outlet } from "react-router-dom";
-// // import { useSelector } from "react-redux";
-// // import { selectIsAuthenticated } from "../redux/selectors";
+import { Navigate, Outlet } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectIsAuthenticated } from "../redux/selectors";
 
-// const ProtectedRoute = ({ redirectPath = "/login" }) => {
-// 	// const isAuthenticated = useSelector(selectIsAuthenticated);
+const ProtectedRoute = ({ redirectPath = "/login" }) => {
+	const isAuthenticated = useSelector(selectIsAuthenticated);
 
-// 	// if (!isAuthenticated) {
-// 	// 	return <Navigate to={redirectPath} replace={true} />;
-// 	// }
+	if (!isAuthenticated) {
+		return <Navigate to={redirectPath} replace={true} />;
+	}
 
-// 	return <Outlet />;
-// };
+	return <Outlet />;
+};
 
-// export default ProtectedRoute;
+export default ProtectedRoute;

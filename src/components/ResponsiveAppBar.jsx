@@ -12,11 +12,59 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-
-const pages = ["Каталог", "Помощь", "Вход"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+import { useDispatch, useSelector } from "react-redux";
+import { selectUserId } from "../redux/selectors";
+import { setLogout } from "../redux/slices/user";
+import { useNavigate } from "react-router-dom";
 
 function ResponsiveAppBar() {
+	const dispatch = useDispatch();
+	const handleLogout = () => {
+		// Здесь может быть ваша логика для выполнения выхода пользователя (логаут)
+		// Например, отправка запроса на сервер или очистка данных пользователя
+		// после успешного выхода, диспатчим экшен setLogout для обновления стейта
+		dispatch(setLogout());
+		// Закрываем меню после выполнения действий
+		console.log("вышел");
+		handleCloseUserMenu();
+	};
+
+	const handleProfileClick = () => {
+		// Здесь может быть ваша логика для выполнения выхода пользователя (логаут)
+		// Например, отправка запроса на сервер или очистка данных пользователя
+		// после успешного выхода, диспатчим экшен setLogout для обновления стейта
+		// dispatch(setLogout());
+		// Закрываем меню после выполнения действий
+		console.log("Профиль");
+		handleCloseUserMenu();
+	};
+
+	const navigate = useNavigate();
+
+	const handleLoginClick = () => {
+		console.log("Войти");
+		navigate("/login");
+	};
+	const handleCatalog = () => {
+		console.log("Каталог");
+	};
+	const handleHelp = () => {
+		console.log("Помощь");
+	};
+	const user = useSelector(selectUserId);
+	const pages = {
+		Каталог: handleCatalog,
+		Помощь: handleHelp,
+		[user ? "Выйти" : "Войти"]: user ? handleLogout : handleLoginClick,
+	};
+
+	const settings = {
+		Профиль: handleProfileClick,
+		[user ? "Выйти" : "Войти"]: user ? handleLogout : handleLoginClick,
+	};
+
+	console.log(user);
+
 	const [anchorElNav, setAnchorElNav] = React.useState(null);
 	const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -86,8 +134,8 @@ function ResponsiveAppBar() {
 								display: { xs: "block", md: "none" },
 							}}
 						>
-							{pages.map((page) => (
-								<MenuItem key={page} onClick={handleCloseNavMenu}>
+							{Object.entries(pages).map(([page, handleClick]) => (
+								<MenuItem key={page} onClick={handleClick}>
 									<Typography textAlign="center">{page}</Typography>
 								</MenuItem>
 							))}
@@ -113,21 +161,23 @@ function ResponsiveAppBar() {
 						POSTUPAWKA
 					</Typography>
 					<Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-						{pages.map((page) => (
-							<Button
-								key={page}
-								onClick={handleCloseNavMenu}
-								sx={{ my: 2, color: "#000", display: "block" }}
-							>
-								{page}
-							</Button>
+						{Object.entries(pages).map(([page, handleClick]) => (
+							<MenuItem key={page} onClick={handleClick}>
+								<Typography textAlign="center" sx={{ color: "#000" }}>
+									{page}
+								</Typography>
+							</MenuItem>
 						))}
 					</Box>
 
 					<Box sx={{ flexGrow: 0 }}>
 						<Tooltip title="Open settings">
 							<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-								<Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+								{user ? (
+									`+7 ${user}`
+								) : (
+									<Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+								)}
 							</IconButton>
 						</Tooltip>
 						<Menu
@@ -146,8 +196,8 @@ function ResponsiveAppBar() {
 							open={Boolean(anchorElUser)}
 							onClose={handleCloseUserMenu}
 						>
-							{settings.map((setting) => (
-								<MenuItem key={setting} onClick={handleCloseUserMenu}>
+							{Object.entries(settings).map(([setting, handleClick]) => (
+								<MenuItem key={setting} onClick={handleClick}>
 									<Typography textAlign="center">{setting}</Typography>
 								</MenuItem>
 							))}
