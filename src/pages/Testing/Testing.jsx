@@ -8,10 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectTestingResults, selectUserId } from "../../redux/selectors";
 import { setTesting, setUserTestId } from "../../redux/slices/user";
 import { v4 as uuidv4 } from "uuid";
-import {
-	useGetResultsQuery,
-	useRequestResultOfTestMutation,
-} from "../../redux/services/usersApi";
+import { useRequestResultOfTestMutation } from "../../redux/services/usersApi";
 import { useNavigate } from "react-router-dom";
 
 function Testing() {

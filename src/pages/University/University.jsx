@@ -5,7 +5,7 @@ function University() {
 	const { id, imageUrl, title, description } = JSON.parse(
 		localStorage.getItem("card")
 	);
-
+	console.log(id);
 	return (
 		<div className={s.main}>
 			<ResponsiveAppBar />
