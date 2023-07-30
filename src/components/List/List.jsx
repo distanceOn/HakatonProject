@@ -2,7 +2,7 @@ import * as React from "react";
 import Grid from "@mui/material/Grid";
 import s from "./List.module.scss";
 import MyCard from "./Card/Card";
-import { MenuItem, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
@@ -42,46 +42,47 @@ function List() {
 		setSize(location.pathname === "/" ? "small" : "big");
 	}, [location]);
 
-	const [cityFilter, setCityFilter] = React.useState("");
+	// const [cityFilter, setCityFilter] = React.useState("");
 	const [titleFilter, setTitleFilter] = React.useState("");
-	const [facultyFilter, setFacultyFilter] = React.useState("");
-	const [specialtyFilter, setSpecialtyFilter] = React.useState("");
+	// const [facultyFilter, setFacultyFilter] = React.useState("");
+	// const [specialtyFilter, setSpecialtyFilter] = React.useState("");
 
-	const handleCityChange = (event) => {
-		setCityFilter(event.target.value);
-	};
+	// const handleCityChange = (event) => {
+	// 	setCityFilter(event.target.value);
+	// };
 
 	const handleTitleChange = (event) => {
 		setTitleFilter(event.target.value);
 	};
 
-	const handleFacultyChange = (event) => {
-		setFacultyFilter(event.target.value);
-	};
+	// const handleFacultyChange = (event) => {
+	// 	setFacultyFilter(event.target.value);
+	// };
 
-	const handleSpecialtyChange = (event) => {
-		setSpecialtyFilter(event.target.value);
-	};
+	// const handleSpecialtyChange = (event) => {
+	// 	setSpecialtyFilter(event.target.value);
+	// };
 
 	const filteredCards = cardsData.filter((card) => {
-		const isCityMatch =
-			cityFilter === "" || card.city.toLowerCase().includes(cityFilter.toLowerCase());
+		// const isCityMatch =
+		// 	cityFilter === "" || card.city.toLowerCase().includes(cityFilter.toLowerCase());
 		const isTitleMatch =
 			titleFilter === "" ||
 			card.title.toLowerCase().includes(titleFilter.toLowerCase());
-		const isFacultyMatch =
-			facultyFilter === "" ||
-			card.faculty.toLowerCase().includes(facultyFilter.toLowerCase());
-		const isSpecialtyMatch =
-			specialtyFilter === "" ||
-			card.specialty.toLowerCase().includes(specialtyFilter.toLowerCase());
-		return isCityMatch && isTitleMatch && isFacultyMatch && isSpecialtyMatch;
+		// const isFacultyMatch =
+		// 	facultyFilter === "" ||
+		// 	card.faculty.toLowerCase().includes(facultyFilter.toLowerCase());
+		// const isSpecialtyMatch =
+		// 	specialtyFilter === "" ||
+		// 	card.specialty.toLowerCase().includes(specialtyFilter.toLowerCase());
+		return isTitleMatch;
+		// return isCityMatch && isTitleMatch && isFacultyMatch && isSpecialtyMatch;
 	});
 
 	return (
 		<div>
 			<div className={s.filter}>
-				<div className={s.filter__faculty}>
+				{/* <div className={s.filter__faculty}>
 					<TextField
 						label="Фильтр по направлению факультета"
 						variant="outlined"
@@ -103,8 +104,8 @@ function List() {
 							</MenuItem>
 						))}
 					</TextField>
-				</div>
-				<div className={s.filter__specialty}>
+				</div> */}
+				{/* <div className={s.filter__specialty}>
 					<TextField
 						label="Фильтр по номеру специальности"
 						variant="outlined"
@@ -123,8 +124,8 @@ function List() {
 							},
 						}}
 					/>
-				</div>
-				<div className={s.filter__city}>
+				</div> */}
+				{/* <div className={s.filter__city}>
 					<TextField
 						label="Фильтр по городу"
 						variant="outlined"
@@ -148,14 +149,14 @@ function List() {
 							)
 						)}
 					</TextField>
-				</div>
+				</div> */}
 				<div className={s.filter__name}>
 					<TextField
 						label="Фильтр по названию"
 						variant="outlined"
 						value={titleFilter}
 						onChange={handleTitleChange}
-						sx={{ bgcolor: "#000", width: "15vw" }}
+						sx={{ bgcolor: "#000", width: "100%" }}
 						InputLabelProps={{
 							style: {
 								color: "#ffd700", // Customize the color of the label text
