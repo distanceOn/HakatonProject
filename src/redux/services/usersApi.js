@@ -4,6 +4,11 @@ export const usersApi = createApi({
 	reducerPath: "usersApi",
 	baseQuery: fetchBaseQuery({
 		baseUrl: "https://api.easyvuz.ru/v1/",
+		prepareHeaders: (headers, { getState }) => {
+			// Set the Content-Type header to application/json for POST requests
+			headers.set("Content-Type", "application/json");
+			return headers;
+		},
 	}),
 	tagTypes: ["Progress"],
 	endpoints: (build) => ({
@@ -14,7 +19,7 @@ export const usersApi = createApi({
 			query: (body) => ({
 				url: `sendQuiz`,
 				method: "POST",
-				body: body.data,
+				body: body,
 			}),
 		}),
 		getResults: build.query({

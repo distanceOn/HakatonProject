@@ -1,32 +1,51 @@
 .main {
-	min-height: 100vh; /* Минимальная высота на весь экран */
+	/* Минимальная высота на весь экран */
+	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-start; /* Выравнивание контента сверху */
+	/* Выравнивание контента сверху */
 	align-items: center;
+	color: #ffd700;
+	gap: 2vw;
 	/* Отступы по краям */
 }
 
-/* Стили для навигационного бара */
-.ResponsiveAppBar {
-	position: fixed; /* Фиксированная позиция сверху */
-	top: 0;
-	left: 0;
-	right: 0;
-	z-index: 100; /* При необходимости увеличьте z-index, если есть другие элементы с более высоким z-index */
-}
-
-/* Стили для центрирования прогресса */
-.CircularProgressContainer {
+.block {
+	width: 50%;
+	height: 20vw;
+	background-color: #ffd700;
+	align-self: center;
+	color: #000;
 	display: flex;
 	flex-direction: column;
-	justify-content: center; /* Центрируем элементы по горизонтали */
-	align-items: center; /* Центрируем элементы по вертикали */
-	min-height: 100vh; /* Минимальная высота на весь экран */
-	gap: 2vw;
-	margin-top: -2vw;
+	justify-content: space-evenly;
+	align-items: center;
+	border-radius: 2vw;
+}
+
+.list {
+	display: flex;
+	gap: 1vw;
+}
+.name {
+	background-color: #000;
+	color: #ffd700;
+	padding: 0.7vw;
+	cursor: pointer;
+	width: 15vw;
+	font-size: 1vw;
+	border-radius: 1vw;
+	transition: all 0.3s ease;
+	&:hover {
+		transform: scale(1.05);
+	}
 }
 
 .h2 {
-	color: #ffd700;
+	font-size: 2vw;
+}
+
+.p {
+	font-size: 1vw;
+	border-bottom: 1px solid #000;
 }

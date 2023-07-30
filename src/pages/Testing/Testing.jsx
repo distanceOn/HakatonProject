@@ -6,10 +6,15 @@ import s from "./Testing.module.scss";
 import Questions from "./Questions/Questions";
 import { useDispatch, useSelector } from "react-redux";
 import { selectTestingResults, selectUserId } from "../../redux/selectors";
-import { setTesting, setUserTestId } from "../../redux/slices/user";
+import {
+	setTesting,
+	setUserTestId,
+	setUserTestResults,
+} from "../../redux/slices/user";
 import { v4 as uuidv4 } from "uuid";
 import { useRequestResultOfTestMutation } from "../../redux/services/usersApi";
 import { useNavigate } from "react-router-dom";
+import { CircularProgress } from "@mui/material";
 
 function Testing() {
 	const [testingState, setTestingState] = useState("default");
@@ -152,9 +157,11 @@ function Testing() {
 
 	const user = useSelector(selectUserId);
 
+	const [isSubmitting, setIsSubmitting] = useState(false);
+
 	const navigate = useNavigate();
 
-	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
 		if (testingState === "completed") {
@@ -175,8 +182,11 @@ function Testing() {
 			const request = async () => {
 				try {
 					const requestBody = JSON.stringify(readyAnswers);
+					console.log(requestBody);
+					setIsLoading(true);
 					const response = await setRequestToResult(requestBody).unwrap(); // Using await here for clarity
 					console.log("Ответ POST-запроса:", response);
+					dispatch(setUserTestResults(response.data));
 					setIsSubmitting(false);
 					dispatch(setUserTestId(randomId));
 					navigate("/directions");
@@ -240,6 +250,11 @@ function Testing() {
 				<div>Loading...</div> // Show a loading indicator while waiting for the response
 			) : (
 				showContent()
+			)}
+			{isLoading ? (
+				<CircularProgress size={40} color="secondary" style={{ marginTop: "15vh" }} />
+			) : (
+				""
 			)}
 		</div>
 	);

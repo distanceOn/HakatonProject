@@ -1,57 +1,22 @@
 import { useSelector } from "react-redux";
 import ResponsiveAppBar from "../../components/ResponsiveAppBar";
-import { useGetResultsQuery } from "../../redux/services/usersApi";
 import s from "./Directions.module.scss";
-import { selectUserTestId } from "../../redux/selectors";
-import { useEffect, useState } from "react";
-import { CircularProgress } from "@mui/material";
+import { selectUserTestResults } from "../../redux/selectors";
 
 function Directions() {
-	const userTestId = useSelector(selectUserTestId);
-	const { data, refetch } = useGetResultsQuery(userTestId);
-
-	useEffect(() => {
-		const intervalId = setInterval(() => {
-			if (data?.data?.status === "IN_PROCESS") {
-				refetch();
-				console.log("Запрос!");
-				console.log(data);
-			}
-		}, 3000);
-
-		return () => {
-			clearInterval(intervalId);
-		};
-	}, [data, refetch]);
-
-	useEffect(() => {
-		console.log(data);
-	}, [data]);
-
-	const [dotsCount, setDotsCount] = useState(1);
-	useEffect(() => {
-		const dotsInterval = setInterval(() => {
-			setDotsCount((prevCount) => (prevCount % 3) + 1);
-		}, 500); // Задайте интервал, через который будут появляться новые точки
-
-		return () => {
-			clearInterval(dotsInterval);
-		};
-	}, []);
-
+	const results = useSelector(selectUserTestResults);
 	return (
 		<div className={s.main}>
-			<ResponsiveAppBar className={s.ResponsiveAppBar} />
-			{data?.data?.status === "IN_PROCESS" ? (
-				<div className={s.CircularProgressContainer}>
-					<h2 className={s.h2}>
-						Получение результатов{Array(dotsCount).fill(".").join("")}
-					</h2>
-					<CircularProgress size={40} color="secondary" style={{}} />
+			<ResponsiveAppBar />
+			<div className={s.block}>
+				<h2 className={s.h2}>Ваши результаты:</h2>
+				<div className={s.list}>
+					{results.map((result) => {
+						return <button className={s.name}>{result.name}</button>;
+					})}
 				</div>
-			) : (
-				""
-			)}
+				<p className={s.p}>Это вам подходит! Посмотрите, куда можно подать документы</p>
+			</div>
 		</div>
 	);
 }

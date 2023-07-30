@@ -6,6 +6,7 @@ const initialState = {
 	userTesting: null,
 	userRequest: false,
 	userTestId: null,
+	userTestResults: null,
 };
 
 const userSlice = createSlice({
@@ -38,9 +39,21 @@ const userSlice = createSlice({
 				userTestId: payload,
 			};
 		},
+		setUserTestResults: (state, { payload }) => {
+			return {
+				...state,
+				userTestResults: payload,
+			};
+		},
 	},
 });
-export const { setLogout, setLogin, setTesting, setRequest, setUserTestId } =
-	userSlice.actions;
+export const {
+	setLogout,
+	setLogin,
+	setTesting,
+	setRequest,
+	setUserTestId,
+	setUserTestResults,
+} = userSlice.actions;
 
 export default userSlice.reducer;
