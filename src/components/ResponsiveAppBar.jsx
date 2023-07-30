@@ -44,6 +44,7 @@ function ResponsiveAppBar() {
 		navigate("/catalog");
 	};
 	const handleHelp = () => {
+		navigate("/help");
 		console.log("Помощь");
 	};
 

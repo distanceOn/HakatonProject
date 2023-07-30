@@ -11,6 +11,7 @@ import Directions from "../pages/Directions/Directions";
 import University from "../pages/University/University";
 import SomeTests from "../pages/SomeTests/SomeTests";
 import ListCredits from "../pages/ListCredits/ListCredits";
+import Help from "../pages/Help/Help";
 
 const AppRoutes = () => {
 	return (
@@ -33,6 +34,8 @@ const AppRoutes = () => {
 			<Route path="/directions" element={<Directions />} />
 
 			<Route path="/creditlist" element={<ListCredits />} />
+
+			<Route path="/help" element={<Help />} />
 
 			{/* <Route path="*" element={<NotFound />} /> */}
 		</Routes>
