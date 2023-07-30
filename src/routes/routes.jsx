@@ -6,6 +6,8 @@ import Catalog from "../pages/Catalog/Catalog";
 import Testing from "../pages/Testing/Testing";
 import Profile from "../pages/Profile/Profile";
 
+import Credit from "../pages/Credit/Credit";
+
 const AppRoutes = () => {
 	return (
 		<Routes>
@@ -19,6 +21,8 @@ const AppRoutes = () => {
 			</Route>
 
 			<Route path="/catalog" element={<Catalog />} />
+
+			<Route path="/credit" element={<Credit />} />
 
 			{/* <Route path="*" element={<NotFound />} /> */}
 		</Routes>

@@ -8,11 +8,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectTestingResults, selectUserId } from "../../redux/selectors";
 import { setTesting } from "../../redux/slices/user";
 import { v4 as uuidv4 } from "uuid";
+import {
+	useGetResultsQuery,
+	useRequestResultOfTestMutation,
+} from "../../redux/services/usersApi";
+import { useNavigate } from "react-router-dom";
 
 function Testing() {
 	const [testingState, setTestingState] = useState("default");
 	const [answers, setAnswers] = useState([]);
 	const [currentCategoryIndex, setCurrentCategoryIndex] = useState(0);
+
+	const [setRequestToResult] = useRequestResultOfTestMutation();
 
 	const questionsList = {
 		categories: {
@@ -143,14 +150,22 @@ function Testing() {
 		}
 	};
 
+	const [randomId, setRandomId] = useState(null);
+
 	const results = useSelector(selectTestingResults);
 	const dispatch = useDispatch();
 
 	const user = useSelector(selectUserId);
 
+	const navigate = useNavigate();
+
+	const [isSubmitting, setIsSubmitting] = useState(false);
+
 	useEffect(() => {
 		if (testingState === "completed") {
-			const randomId = uuidv4();
+			setIsSubmitting(true); // Show loading state while submitting
+
+			setRandomId(uuidv4());
 			const readyAnswers = {
 				testId: randomId,
 				studentId: user,
@@ -161,8 +176,27 @@ function Testing() {
 			});
 
 			dispatch(setTesting(readyAnswers));
+			const request = async () => {
+				try {
+					const response = await setRequestToResult(readyAnswers).unwrap(); // Using await here for clarity
+					console.log("Ответ POST-запроса:", response);
+					setIsSubmitting(false);
+					navigate("/catalog/directions");
+				} catch (error) {
+					console.error("Ошибка при выполнении POST-запроса:", error);
+					setTimeout(() => {
+						request();
+					}, 3000);
+				}
+			};
+
+			request();
 		}
-	}, [testingState, answers, dispatch, user]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [testingState]);
+
+	const { data } = useGetResultsQuery(randomId);
+	console.log("Полученные данные GET-запроса:", data);
 
 	useEffect(() => {
 		console.log(results);
@@ -207,7 +241,11 @@ function Testing() {
 	return (
 		<div className={s.testing}>
 			<ResponsiveAppBar />
-			{showContent()}
+			{isSubmitting ? (
+				<div>Loading...</div> // Show a loading indicator while waiting for the response
+			) : (
+				showContent()
+			)}
 		</div>
 	);
 }
