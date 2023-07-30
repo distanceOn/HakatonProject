@@ -4,3 +4,4 @@ export const selectTestingResults = (state) => state.user.userTesting;
 export const selectUserRequest = (state) => state.user.userRequest;
 export const selectUserTestId = (state) => state.user.userTestId;
 export const selectUserTestResults = (state) => state.user.userTestResults;
+export const selectUserChoice = (state) => state.user.userChoice;

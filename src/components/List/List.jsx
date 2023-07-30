@@ -14,7 +14,6 @@ function List() {
 	const [cardsData, setCardsData] = useState([]);
 
 	useEffect(() => {
-		console.log(allUni);
 		setData(allUni.data);
 	}, [allUni]);
 
@@ -25,32 +24,27 @@ function List() {
 				imageUrl: i.photo,
 				title: i.name,
 				description: i.description,
+				city: i.university?.address?.city || "",
+				faculty: i.university?.faculty || "",
+				specialty: i.university?.specialty || "",
 			}));
 			setCardsData(filteredCards);
+			console.log(cardsData);
 		}
 	}, [data]);
-	// {
-	// 	id: 1,
-	// 	imageUrl:
-	// 		"https://ic.pics.livejournal.com/smapse/90291932/215411/215411_original.png",
-	// 	title: "Заголовок карточки 1",
-	// 	description: "Описание карточки 1",
-	// },
 
 	const [size, setSize] = useState("small");
 
 	const location = useLocation();
 
 	useEffect(() => {
-		if (location.pathname === "/") {
-			setSize("small");
-		} else if (location.pathname === "/catalog") {
-			setSize("big");
-		}
+		setSize(location.pathname === "/" ? "small" : "big");
 	}, [location]);
 
 	const [cityFilter, setCityFilter] = React.useState("");
 	const [titleFilter, setTitleFilter] = React.useState("");
+	const [facultyFilter, setFacultyFilter] = React.useState("");
+	const [specialtyFilter, setSpecialtyFilter] = React.useState("");
 
 	const handleCityChange = (event) => {
 		setCityFilter(event.target.value);
@@ -59,9 +53,6 @@ function List() {
 	const handleTitleChange = (event) => {
 		setTitleFilter(event.target.value);
 	};
-
-	const [facultyFilter, setFacultyFilter] = React.useState("");
-	const [specialtyFilter, setSpecialtyFilter] = React.useState("");
 
 	const handleFacultyChange = (event) => {
 		setFacultyFilter(event.target.value);
@@ -73,22 +64,18 @@ function List() {
 
 	const filteredCards = cardsData.filter((card) => {
 		const isCityMatch =
-			cityFilter === "" ||
-			(card.city && card.city.toLowerCase().includes(cityFilter.toLowerCase()));
+			cityFilter === "" || card.city.toLowerCase().includes(cityFilter.toLowerCase());
 		const isTitleMatch =
 			titleFilter === "" ||
 			card.title.toLowerCase().includes(titleFilter.toLowerCase());
 		const isFacultyMatch =
 			facultyFilter === "" ||
-			(card.faculty &&
-				card.faculty.toLowerCase().includes(facultyFilter.toLowerCase()));
+			card.faculty.toLowerCase().includes(facultyFilter.toLowerCase());
 		const isSpecialtyMatch =
 			specialtyFilter === "" ||
-			(card.specialty &&
-				card.specialty.toLowerCase().includes(specialtyFilter.toLowerCase()));
+			card.specialty.toLowerCase().includes(specialtyFilter.toLowerCase());
 		return isCityMatch && isTitleMatch && isFacultyMatch && isSpecialtyMatch;
 	});
-	// Здесь можно определить данные для каждой карточки
 
 	return (
 		<div>
@@ -152,10 +139,9 @@ function List() {
 						}}
 					>
 						<MenuItem value="">Все</MenuItem>
-						{/* Предположим, что у вас есть массив городов, который можно использовать для выбора */}
 						{["Москва", "Санкт-Петербург", "Казань", "Екатеринбург", "Новосибирск"].map(
 							(city) => (
-								<MenuItem sx={{}} key={city} value={city}>
+								<MenuItem key={city} value={city}>
 									{city}
 								</MenuItem>
 							)
@@ -201,6 +187,9 @@ function List() {
 							imageUrl={card.imageUrl}
 							title={card.title}
 							description={card.description}
+							city={cardsData.city} // Corrected: Access city from the individual card object
+							faculty={card.faculty} // Corrected: Access faculty from the individual card object
+							specialty={card.specialty} // Corrected: Access specialty from the individual card object
 						/>
 					</Grid>
 				))}

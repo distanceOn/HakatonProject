@@ -30,3 +30,20 @@
 	display: flex;
 	flex-direction: column;
 }
+
+.btn {
+	background-color: #f01b1bf1;
+	width: 50%;
+	align-self: center;
+	padding: 1vw;
+	border-radius: 2vw;
+	border: 1px solid black;
+	outline: none;
+	transition: all 0.3s ease;
+	cursor: pointer;
+	font-size: 1vw;
+	font-weight: 800;
+	&:hover {
+		transform: scale(1.05);
+	}
+}

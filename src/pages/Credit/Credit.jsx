@@ -6,6 +6,7 @@ import CreditPassport from "./components/CreditPassport/CreditPassport";
 import CreditContacts from "./components/CreditContacts/CreditContacts";
 import CreditJob from "./components/CreditJob/CreditJob";
 import CreditPersonalInfo from "./components/CreditPersonalInfo/CreditPersonalInfo";
+import CreditEduForm from "./components/CreditEduForm/CreditEduForm";
 
 function Credit() {
 	const [currentStep, setCurrentStep] = useState("contacts");
@@ -17,6 +18,10 @@ function Credit() {
 			setCurrentStep("job");
 		} else if (currentStep === "job") {
 			setCurrentStep("personal");
+		} else if (currentStep === "personal") {
+			setCurrentStep("eduForm");
+		} else if (currentStep === "eduForm") {
+			alert("Данные отправлены!");
 		}
 	};
 
@@ -27,6 +32,8 @@ function Credit() {
 			setCurrentStep("passport");
 		} else if (currentStep === "personal") {
 			setCurrentStep("job");
+		} else if (currentStep === "eduForm") {
+			setCurrentStep("personal");
 		}
 	};
 
@@ -162,6 +169,9 @@ function Credit() {
 						handleChange={handleChange}
 						handlePreviousStep={handlePreviousStep}
 					/>
+				)}
+				{currentStep === "eduForm" && (
+					<CreditEduForm handlePreviousStep={handlePreviousStep} />
 				)}
 			</form>
 		</div>

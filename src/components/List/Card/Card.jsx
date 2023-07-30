@@ -8,7 +8,15 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
 
-const MyCard = ({ id, imageUrl, title, description }) => {
+const MyCard = ({
+	id,
+	imageUrl,
+	title,
+	description,
+	city,
+	faculty,
+	specialty,
+}) => {
 	const [size, setSize] = useState("small");
 
 	const location = useLocation();
@@ -59,6 +67,27 @@ const MyCard = ({ id, imageUrl, title, description }) => {
 					className={s.cardDescription}
 				>
 					{description}
+				</Typography>
+				<Typography
+					variant="body1"
+					sx={{ backgroundColor: "#ffd700" }}
+					className={s.city}
+				>
+					{city}
+				</Typography>
+				<Typography
+					variant="body1"
+					sx={{ backgroundColor: "#ffd700" }}
+					className={s.faculty}
+				>
+					{faculty}
+				</Typography>
+				<Typography
+					variant="body1"
+					sx={{ backgroundColor: "#ffd700" }}
+					className={s.specialty}
+				>
+					{specialty}
 				</Typography>
 			</CardContent>
 		</Card>

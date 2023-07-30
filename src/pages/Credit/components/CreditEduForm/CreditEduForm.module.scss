@@ -1,0 +1,39 @@
+.form {
+	background-color: #ffd700;
+	width: 50%;
+	margin: auto;
+	margin-top: 2vw;
+	padding: 2vw;
+	box-sizing: border-box;
+	display: flex;
+	gap: 2vw;
+	flex-wrap: wrap;
+	justify-content: center;
+	border-radius: 2vw;
+}
+.input {
+	width: 15vw;
+	margin-right: 2vw;
+}
+
+.block {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 2vw;
+}
+
+.list {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 2vw;
+}
+
+.btn {
+	padding: 1vw;
+	width: 15vw;
+	letter-spacing: 3px;
+	background-color: #000;
+}

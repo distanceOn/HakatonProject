@@ -7,6 +7,7 @@ const initialState = {
 	userRequest: false,
 	userTestId: null,
 	userTestResults: null,
+	userChoice: null,
 };
 
 const userSlice = createSlice({
@@ -45,6 +46,12 @@ const userSlice = createSlice({
 				userTestResults: payload,
 			};
 		},
+		setUserChoice: (state, { payload }) => {
+			return {
+				...state,
+				userChoice: payload,
+			};
+		},
 	},
 });
 export const {
@@ -54,6 +61,7 @@ export const {
 	setRequest,
 	setUserTestId,
 	setUserTestResults,
+	setUserChoice,
 } = userSlice.actions;
 
 export default userSlice.reducer;
