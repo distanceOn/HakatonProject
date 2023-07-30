@@ -24,6 +24,7 @@ const Modal = ({ isOpen, setIsOpen }) => {
 
 	const handleFaculty = () => {
 		console.log("Выбран факультет", selectedFaculty);
+		navigate("/catalog");
 	};
 
 	const handleTest = () => {
@@ -32,6 +33,7 @@ const Modal = ({ isOpen, setIsOpen }) => {
 	};
 
 	const handleGoToFaculty = () => {
+		navigate("/catalog");
 		console.log("Список факультетов");
 	};
 

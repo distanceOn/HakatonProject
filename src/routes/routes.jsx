@@ -10,6 +10,7 @@ import Credit from "../pages/Credit/Credit";
 import Directions from "../pages/Directions/Directions";
 import University from "../pages/University/University";
 import SomeTests from "../pages/SomeTests/SomeTests";
+import ListCredits from "../pages/ListCredits/ListCredits";
 
 const AppRoutes = () => {
 	return (
@@ -30,6 +31,8 @@ const AppRoutes = () => {
 			<Route path="/card/:id" element={<University />} />
 
 			<Route path="/directions" element={<Directions />} />
+
+			<Route path="/creditlist" element={<ListCredits />} />
 
 			{/* <Route path="*" element={<NotFound />} /> */}
 		</Routes>

@@ -28,6 +28,9 @@ export const usersApi = createApi({
 		getAllUniverse: build.query({
 			query: () => `universities/getAll`,
 		}),
+		getCredits: build.query({
+			query: () => `loans/result/eid`,
+		}),
 	}),
 });
 
@@ -35,4 +38,5 @@ export const {
 	useRequestResultOfTestMutation,
 	useGetResultsQuery,
 	useGetAllUniverseQuery,
+	useGetCreditsQuery,
 } = usersApi;

@@ -1,0 +1,12 @@
+.main {
+	display: flex;
+	flex-direction: column;
+	gap: 5vh;
+	padding-bottom: 5vh;
+	justify-content: center;
+}
+
+.card {
+	width: 60%;
+	background-color: #ffd700;
+}

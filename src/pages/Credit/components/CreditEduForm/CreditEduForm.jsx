@@ -1,14 +1,18 @@
+import { useNavigate } from "react-router-dom";
 import s from "./CreditEduForm.module.scss";
 
 import Button from "@mui/material/Button";
 
 function CreditEduForm({ handlePreviousStep }) {
+	const navigate = useNavigate();
 	const handleBudget = () => {
+		navigate("/");
 		alert("Поздравляем, заявка отправлена!");
 	};
 
 	const handleCommercial = () => {
 		alert("Хотите кредит?");
+		navigate("/creditlist");
 	};
 	return (
 		<div className={s.block}>
