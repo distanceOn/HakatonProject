@@ -31,6 +31,7 @@ function List() {
 			setCardsData(filteredCards);
 			console.log(cardsData);
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [data]);
 
 	const [size, setSize] = useState("small");
