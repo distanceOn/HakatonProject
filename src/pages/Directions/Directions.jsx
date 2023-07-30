@@ -3,7 +3,8 @@ import ResponsiveAppBar from "../../components/ResponsiveAppBar";
 import { useGetResultsQuery } from "../../redux/services/usersApi";
 import s from "./Directions.module.scss";
 import { selectUserTestId } from "../../redux/selectors";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { CircularProgress } from "@mui/material";
 
 function Directions() {
 	const userTestId = useSelector(selectUserTestId);
@@ -27,9 +28,30 @@ function Directions() {
 		console.log(data);
 	}, [data]);
 
+	const [dotsCount, setDotsCount] = useState(1);
+	useEffect(() => {
+		const dotsInterval = setInterval(() => {
+			setDotsCount((prevCount) => (prevCount % 3) + 1);
+		}, 500); // Задайте интервал, через который будут появляться новые точки
+
+		return () => {
+			clearInterval(dotsInterval);
+		};
+	}, []);
+
 	return (
 		<div className={s.main}>
-			<ResponsiveAppBar />
+			<ResponsiveAppBar className={s.ResponsiveAppBar} />
+			{data?.data?.status === "IN_PROCESS" ? (
+				<div className={s.CircularProgressContainer}>
+					<h2 className={s.h2}>
+						Получение результатов{Array(dotsCount).fill(".").join("")}
+					</h2>
+					<CircularProgress size={40} color="secondary" style={{}} />
+				</div>
+			) : (
+				""
+			)}
 		</div>
 	);
 }
