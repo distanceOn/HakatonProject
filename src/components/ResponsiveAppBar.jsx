@@ -47,10 +47,15 @@ function ResponsiveAppBar() {
 	const handleHelp = () => {
 		console.log("Помощь");
 	};
+
+	const handleTest = () => {
+		navigate("/tests");
+	};
 	const user = useSelector(selectUserId);
 	const pages = {
 		Каталог: handleCatalog,
 		Помощь: handleHelp,
+		Тесты: handleTest,
 		[user ? "Выйти" : "Войти"]: user ? handleLogout : handleLoginClick,
 	};
 
@@ -173,11 +178,7 @@ function ResponsiveAppBar() {
 					<Box sx={{ flexGrow: 0 }}>
 						<Tooltip title="Open settings">
 							<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-								{user ? (
-									`+7 ${user}`
-								) : (
-									<Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-								)}
+								{user ? `+7 ${user}` : <Avatar alt="User" src="/static/images/avatar/2.jpg" />}
 							</IconButton>
 						</Tooltip>
 						<Menu

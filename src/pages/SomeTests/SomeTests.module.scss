@@ -1,0 +1,46 @@
+.main {
+	display: flex;
+	flex-direction: column;
+	gap: 10vh;
+	justify-content: center;
+	align-items: center;
+}
+
+.block {
+	margin-top: 5vw;
+	width: 50%;
+	height: 20vw;
+	border-radius: 2vw;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.tests {
+	list-style-type: none;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+	gap: 2vw;
+}
+.test {
+	width: 30%;
+	background-color: #ffd700;
+	padding: 1vw;
+	text-align: center;
+	border-radius: 1vw;
+}
+
+.button {
+	background-color: #000;
+	color: #ffd700;
+	width: 100%;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	&:hover {
+		transform: scale(1.05);
+	}
+}
