@@ -6,3 +6,5 @@
 
 бэкэнд проекта https://api.easyvuz.ru/
 
+https://github.com/belyaev-dev/studentik-ai
+
