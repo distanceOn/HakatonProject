@@ -230,6 +230,7 @@ function List() {
 							: { xs: 10, sm: 10, md: 10, lg: 10 })}
 					>
 						<MyCard
+							id={card.id}
 							imageUrl={card.imageUrl}
 							title={card.title}
 							description={card.description}

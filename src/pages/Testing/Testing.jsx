@@ -6,7 +6,7 @@ import s from "./Testing.module.scss";
 import Questions from "./Questions/Questions";
 import { useDispatch, useSelector } from "react-redux";
 import { selectTestingResults, selectUserId } from "../../redux/selectors";
-import { setTesting } from "../../redux/slices/user";
+import { setTesting, setUserTestId } from "../../redux/slices/user";
 import { v4 as uuidv4 } from "uuid";
 import {
 	useGetResultsQuery,
@@ -150,8 +150,6 @@ function Testing() {
 		}
 	};
 
-	const [randomId, setRandomId] = useState(null);
-
 	const results = useSelector(selectTestingResults);
 	const dispatch = useDispatch();
 
@@ -165,7 +163,8 @@ function Testing() {
 		if (testingState === "completed") {
 			setIsSubmitting(true); // Show loading state while submitting
 
-			setRandomId(uuidv4());
+			const randomId = uuidv4();
+
 			const readyAnswers = {
 				testId: randomId,
 				studentId: user,
@@ -178,10 +177,12 @@ function Testing() {
 			dispatch(setTesting(readyAnswers));
 			const request = async () => {
 				try {
-					const response = await setRequestToResult(readyAnswers).unwrap(); // Using await here for clarity
+					const requestBody = JSON.stringify(readyAnswers);
+					const response = await setRequestToResult(requestBody).unwrap(); // Using await here for clarity
 					console.log("Ответ POST-запроса:", response);
 					setIsSubmitting(false);
-					navigate("/catalog/directions");
+					dispatch(setUserTestId(randomId));
+					navigate("/directions");
 				} catch (error) {
 					console.error("Ошибка при выполнении POST-запроса:", error);
 					setTimeout(() => {
@@ -194,9 +195,6 @@ function Testing() {
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [testingState]);
-
-	const { data } = useGetResultsQuery(randomId);
-	console.log("Полученные данные GET-запроса:", data);
 
 	useEffect(() => {
 		console.log(results);

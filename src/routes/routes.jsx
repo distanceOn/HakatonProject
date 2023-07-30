@@ -7,6 +7,8 @@ import Testing from "../pages/Testing/Testing";
 import Profile from "../pages/Profile/Profile";
 
 import Credit from "../pages/Credit/Credit";
+import Directions from "../pages/Directions/Directions";
+import University from "../pages/University/University";
 
 const AppRoutes = () => {
 	return (
@@ -23,6 +25,10 @@ const AppRoutes = () => {
 			<Route path="/catalog" element={<Catalog />} />
 
 			<Route path="/credit" element={<Credit />} />
+
+			<Route path="/card/:id" element={<University />} />
+
+			<Route path="/directions" element={<Directions />} />
 
 			{/* <Route path="*" element={<NotFound />} /> */}
 		</Routes>

@@ -4,14 +4,16 @@ import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import s from "./Card.module.scss"; // Импортируем стили
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
 
-const MyCard = ({ imageUrl, title, description }) => {
+const MyCard = ({ id, imageUrl, title, description }) => {
 	const [size, setSize] = useState("small");
 
 	const location = useLocation();
+
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		if (location.pathname === "/") {
@@ -21,8 +23,17 @@ const MyCard = ({ imageUrl, title, description }) => {
 		}
 	}, [location]);
 
+	const handleCard = () => {
+		navigate(`/card/${id.toString()}`);
+		localStorage.setItem(
+			"card",
+			JSON.stringify({ id, imageUrl, title, description })
+		);
+	};
+
 	return (
 		<Card
+			onClick={handleCard}
 			className={size === "small" ? s.card : s.card__big}
 			sx={{ backgroundColor: "#ffd700" }}
 		>
