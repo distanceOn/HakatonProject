@@ -25,7 +25,14 @@ export const usersApi = createApi({
 		getResults: build.query({
 			query: (id) => `getResults/${id} `,
 		}),
+		getAllUniverse: build.query({
+			query: () => `universities/getAll`,
+		}),
 	}),
 });
 
-export const { useRequestResultOfTestMutation, useGetResultsQuery } = usersApi;
+export const {
+	useRequestResultOfTestMutation,
+	useGetResultsQuery,
+	useGetAllUniverseQuery,
+} = usersApi;

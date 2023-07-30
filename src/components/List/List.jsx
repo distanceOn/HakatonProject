@@ -6,131 +6,36 @@ import { MenuItem, TextField } from "@mui/material";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { useGetAllUniverseQuery } from "../../redux/services/usersApi";
 
 function List() {
-	const cardsData = [
-		{
-			id: 1,
-			imageUrl:
-				"https://ic.pics.livejournal.com/smapse/90291932/215411/215411_original.png",
-			title: "Заголовок карточки 1",
-			description: "Описание карточки 1",
-		},
-		{
-			id: 1,
-			imageUrl:
-				"https://ic.pics.livejournal.com/smapse/90291932/215411/215411_original.png",
-			title: "Заголовок карточки 1",
-			description: "Описание карточки 1",
-		},
-		{
-			id: 1,
-			imageUrl:
-				"https://ic.pics.livejournal.com/smapse/90291932/215411/215411_original.png",
-			title: "Заголовок карточки 1",
-			description: "Описание карточки 1",
-		},
-		{
-			id: 1,
-			imageUrl:
-				"https://ic.pics.livejournal.com/smapse/90291932/215411/215411_original.png",
-			title: "Заголовок карточки 1",
-			description: "Описание карточки 1",
-		},
-		{
-			id: 1,
-			imageUrl:
-				"https://ic.pics.livejournal.com/smapse/90291932/215411/215411_original.png",
-			title: "Заголовок карточки 1",
-			description: "Описание карточки 1",
-		},
-		{
-			id: 1,
-			imageUrl:
-				"https://ic.pics.livejournal.com/smapse/90291932/215411/215411_original.png",
-			title: "Заголовок карточки 1",
-			description: "Описание карточки 1",
-		},
-		{
-			id: 1,
-			imageUrl:
-				"https://ic.pics.livejournal.com/smapse/90291932/215411/215411_original.png",
-			title: "Заголовок карточки 1",
-			description: "Описание карточки 1",
-		},
-		{
-			id: 1,
-			imageUrl:
-				"https://ic.pics.livejournal.com/smapse/90291932/215411/215411_original.png",
-			title: "Заголовок карточки 1",
-			description: "Описание карточки 1",
-		},
-		{
-			id: 1,
-			imageUrl:
-				"https://ic.pics.livejournal.com/smapse/90291932/215411/215411_original.png",
-			title: "Заголовок карточки 1",
-			description: "Описание карточки 1",
-		},
-		{
-			id: 1,
-			imageUrl:
-				"https://ic.pics.livejournal.com/smapse/90291932/215411/215411_original.png",
-			title: "Заголовок карточки 1",
-			description: "Описание карточки 1",
-		},
-		{
-			id: 1,
-			imageUrl:
-				"https://ic.pics.livejournal.com/smapse/90291932/215411/215411_original.png",
-			title: "Заголовок карточки 1",
-			description: "Описание карточки 1",
-		},
-		{
-			id: 1,
-			imageUrl:
-				"https://ic.pics.livejournal.com/smapse/90291932/215411/215411_original.png",
-			title: "Заголовок карточки 1",
-			description: "Описание карточки 1",
-		},
-		{
-			id: 1,
-			imageUrl:
-				"https://ic.pics.livejournal.com/smapse/90291932/215411/215411_original.png",
-			title: "Заголовок карточки 1",
-			description: "Описание карточки 1",
-		},
-		{
-			id: 1,
-			imageUrl:
-				"https://ic.pics.livejournal.com/smapse/90291932/215411/215411_original.png",
-			title: "Заголовок карточки 1",
-			description: "Описание карточки 1",
-		},
-		{
-			id: 1,
-			imageUrl:
-				"https://ic.pics.livejournal.com/smapse/90291932/215411/215411_original.png",
-			title: "Заголовок карточки 1",
-			description: "Описание карточки 1",
-		},
-		{
-			id: 1,
-			imageUrl:
-				"https://ic.pics.livejournal.com/smapse/90291932/215411/215411_original.png",
-			title: "Заголовок карточки 1",
-			description: "Описание карточки 1",
-		},
-		{
-			id: 1,
-			imageUrl:
-				"https://ic.pics.livejournal.com/smapse/90291932/215411/215411_original.png",
-			title: "Заголовок карточки 1",
-			description: "Описание карточки 1",
-		},
+	const allUni = useGetAllUniverseQuery();
+	const [data, setData] = useState(null);
+	const [cardsData, setCardsData] = useState([]);
 
-		// Добавьте другие данные для карточек по аналогии
-	];
+	useEffect(() => {
+		console.log(allUni);
+		setData(allUni.data);
+	}, [allUni]);
+
+	useEffect(() => {
+		if (data) {
+			const filteredCards = data.data.map((i) => ({
+				id: i.id,
+				imageUrl: i.photo,
+				title: i.name,
+				description: i.description,
+			}));
+			setCardsData(filteredCards);
+		}
+	}, [data]);
+	// {
+	// 	id: 1,
+	// 	imageUrl:
+	// 		"https://ic.pics.livejournal.com/smapse/90291932/215411/215411_original.png",
+	// 	title: "Заголовок карточки 1",
+	// 	description: "Описание карточки 1",
+	// },
 
 	const [size, setSize] = useState("small");
 
@@ -155,6 +60,17 @@ function List() {
 		setTitleFilter(event.target.value);
 	};
 
+	const [facultyFilter, setFacultyFilter] = React.useState("");
+	const [specialtyFilter, setSpecialtyFilter] = React.useState("");
+
+	const handleFacultyChange = (event) => {
+		setFacultyFilter(event.target.value);
+	};
+
+	const handleSpecialtyChange = (event) => {
+		setSpecialtyFilter(event.target.value);
+	};
+
 	const filteredCards = cardsData.filter((card) => {
 		const isCityMatch =
 			cityFilter === "" ||
@@ -162,13 +78,64 @@ function List() {
 		const isTitleMatch =
 			titleFilter === "" ||
 			card.title.toLowerCase().includes(titleFilter.toLowerCase());
-		return isCityMatch && isTitleMatch;
+		const isFacultyMatch =
+			facultyFilter === "" ||
+			(card.faculty &&
+				card.faculty.toLowerCase().includes(facultyFilter.toLowerCase()));
+		const isSpecialtyMatch =
+			specialtyFilter === "" ||
+			(card.specialty &&
+				card.specialty.toLowerCase().includes(specialtyFilter.toLowerCase()));
+		return isCityMatch && isTitleMatch && isFacultyMatch && isSpecialtyMatch;
 	});
 	// Здесь можно определить данные для каждой карточки
 
 	return (
 		<div>
 			<div className={s.filter}>
+				<div className={s.filter__faculty}>
+					<TextField
+						label="Фильтр по направлению факультета"
+						variant="outlined"
+						value={facultyFilter}
+						onChange={handleFacultyChange}
+						select
+						sx={{ bgcolor: "#000", width: "15vw" }}
+						InputLabelProps={{
+							style: {
+								color: "#ffd700",
+								fontWeight: 700,
+							},
+						}}
+					>
+						<MenuItem value="">Все</MenuItem>
+						{["Факультет 1", "Факультет 2", "Факультет 3"].map((faculty) => (
+							<MenuItem key={faculty} value={faculty}>
+								{faculty}
+							</MenuItem>
+						))}
+					</TextField>
+				</div>
+				<div className={s.filter__specialty}>
+					<TextField
+						label="Фильтр по номеру специальности"
+						variant="outlined"
+						value={specialtyFilter}
+						onChange={handleSpecialtyChange}
+						sx={{ bgcolor: "#000", width: "15vw" }}
+						InputLabelProps={{
+							style: {
+								color: "#ffd700",
+								fontWeight: 700,
+							},
+						}}
+						InputProps={{
+							style: {
+								color: "#ffd700",
+							},
+						}}
+					/>
+				</div>
 				<div className={s.filter__city}>
 					<TextField
 						label="Фильтр по городу"

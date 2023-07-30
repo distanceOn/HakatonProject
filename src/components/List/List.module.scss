@@ -3,14 +3,23 @@
 .filter {
 	margin-top: 2vh;
 	display: flex;
-	justify-content: flex-end;
-	margin-right: 6.5vw;
+	justify-content: center;
+	gap: 1vw;
+
 	margin-bottom: 2vh;
 	&__city {
 		background-color: #ffd700;
 		padding: 5px;
 	}
 	&__name {
+		background-color: #ffd700;
+		padding: 5px;
+	}
+	&__faculty {
+		background-color: #ffd700;
+		padding: 5px;
+	}
+	&__specialty {
 		background-color: #ffd700;
 		padding: 5px;
 	}
